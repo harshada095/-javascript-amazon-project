@@ -1,5 +1,6 @@
 import { products } from "../data/products.js";
 import { cart, addToCart } from "../data/cart.js";
+import { convertCurrency } from "./utils/currency.js";
 
 let productHtml = ``;
 const product1 = "";
@@ -24,7 +25,7 @@ products.forEach((product) => {
   </div>
 
   <div class="product-price">
-      $${convertCurrency(product.priceCents)}
+      ${convertCurrency(product.priceCents)}
   </div>
 
   <div data-product-id = "${product.id}"
@@ -45,12 +46,12 @@ products.forEach((product) => {
 
   <div class="product-spacer"></div>
 
- <div class="added-to-cart js-added-to-cart-${product.id}">
+  <div class="added-to-cart js-added-to-cart-${product.id}">
     <img src="images/icons/checkmark.png">
     Added
   </div>
 
-   <button data-product-name = "${product.name}"
+  <button data-product-name = "${product.name}"
    data-product-id = "${product.id}"
   class="add-to-cart-button button-primary js-add-to-cart">
     Add to Cart
