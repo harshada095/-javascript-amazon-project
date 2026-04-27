@@ -1,20 +1,43 @@
-export const cart = [];
+export let cart = JSON.parse(localStorage.getItem("cart"));
 
-export function addToCart(productId,quantity){
-let matchingItem;
+if (!cart) {
+  cart = [];
+}
 
-cart.forEach(cartItem => {
-  if (cartItem.productId === productId) {
-    matchingItem = cartItem;
-  }
-})
+function saveToStorage() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
 
-if (matchingItem) {
-  matchingItem.quantity += quantity;
-} else {
-  cart.push({
-    productId,
-    quantity
+export function addToCart(productId, quantity) {
+  let matchingItem;
+
+  cart.forEach((cartItem) => {
+    if (cartItem.productId === productId) {
+      matchingItem = cartItem;
+    }
   });
-};
-};
+
+  if (matchingItem) {
+    matchingItem.quantity += quantity;
+  } else {
+    cart.push({
+      productId,
+      quantity,
+    });
+  }
+
+  saveToStorage();
+}
+
+export function removeFromCart(productId) {
+  const newCart = [];
+
+  cart.forEach((cartItem) => {
+    if (cartItem.productId !== productId) {
+      newCart.push(cartItem);
+    }
+  });
+
+  cart = newCart;
+  saveToStorage();
+}

@@ -24,7 +24,7 @@ products.forEach((product) => {
   </div>
 
   <div class="product-price">
-      $${(product.priceCents / 100).toFixed(2)}
+      $${convertCurrency(product.priceCents)}
   </div>
 
   <div data-product-id = "${product.id}"
