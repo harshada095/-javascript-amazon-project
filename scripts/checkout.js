@@ -1,4 +1,4 @@
-import { cart, removeFromCart } from "../data/cart.js";
+import { cart, removeFromCart, calculateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { convertCurrency } from "./utils/currency.js";
 
@@ -94,6 +94,7 @@ let orderSummaryDiv = document.querySelector(".js-order-summary");
 orderSummaryDiv.innerHTML = cartHtml;
 
 let deleteButtons = document.querySelectorAll(".js-delete-quantity");
+let returnLink = document.querySelector(".js-return-to-home-link");
 
 deleteButtons.forEach((deleteButton) => {
   deleteButton.addEventListener("click", () => {
@@ -103,5 +104,10 @@ deleteButtons.forEach((deleteButton) => {
       `.js-cart-itme-container-${productId}`,
     );
     matchingDiv.remove();
+    let quantity = calculateCartQuantity();
+    returnLink.innerHTML = `${quantity} items`;
   });
 });
+
+let quantity = calculateCartQuantity();
+returnLink.innerHTML = `${quantity} items`;
